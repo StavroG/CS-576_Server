@@ -1,17 +1,17 @@
-package server;
+package assignment1;
 
-public class Main
+public class TcpMain
 {
     private static final int PORT_NUMBER = 5000;
 
     public static void main(String[] args)
     {
-        ServerConnection serverConnection = new ServerConnection();
+        TcpServer tcpServer = new TcpServer();
 
         try
         {
-            serverConnection.startServer(PORT_NUMBER);
-            serverConnection.waitForClient();
+            tcpServer.startServer(PORT_NUMBER);
+            tcpServer.waitForClient();
         }
         catch(Exception e)
         {
@@ -22,26 +22,26 @@ public class Main
         {
             try
             {
-                String input = serverConnection.listenToClient();
+                String input = tcpServer.listenToClient();
 
                 if(input.equals("quit"))
                 {
-                    serverConnection.disconnectFromClient();
-                    serverConnection.shutdownServer();
+                    tcpServer.disconnectFromClient();
+                    tcpServer.shutdownServer();
                     break;
                 }
                 else
                 {
                     String modifiedInput = addOneToString(input);
-                    serverConnection.sendMessage(modifiedInput);
+                    tcpServer.sendMessage(modifiedInput);
                 }
             }
             catch(Exception e)
             {
                 System.out.println("An error occurred, disconnecting from client");
                 System.out.println("Error message: " + e.getMessage());
-                serverConnection.disconnectFromClient();
-                serverConnection.waitForClient();
+                tcpServer.disconnectFromClient();
+                tcpServer.waitForClient();
             }
         }
     }
