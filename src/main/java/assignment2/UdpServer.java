@@ -49,7 +49,7 @@ public class UdpServer
         }
         catch(IOException e)
         {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Could not listen for a message from the client");
         }
     }
 
@@ -68,7 +68,7 @@ public class UdpServer
         }
         catch(IOException e)
         {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Could not send a response to the client");
         }
     }
 
